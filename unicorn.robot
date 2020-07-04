@@ -8,7 +8,9 @@ Resource  config.robot
 *** Variables ***
 &{MCP_port_A0}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA0}  Mode=${OUT}
 &{MCP_port_A1}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA1}  Mode=${OUT}
-&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
+#&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
+
+${kalle} =    0x14
 
 *** Keywords ***
 Invalid Selection
@@ -21,7 +23,6 @@ Initialize MCP ports
 	#:FOR  ${index}  IN RANGE  0  8
 	#\	log to console  ${MCP_CONTAINTER1}[${index}]
 	#\       Config MCP  ${MCP_CONTAINTER1}[${index}]
-
 
 Initialize Interfaces
 	log to console    *** Setup I2C and SPI interfaces
@@ -50,20 +51,22 @@ MCP_test
 	Config MCP   ${MCP_port_A0}
 	Config MCP   ${MCP_port_A1}
 
-Power Test
-	Power Control  ${DC_300V}  ${ON}
-	Power Control  ${AC_230V}  ${ON}
-	Power Control  ${PROTECTED_EARTH}  ${ON}
-	Power Control  ${p_24V}  ${ON}
-	Power Control  ${p_5V}  ${ON}
-
-	Power Control  ${DC_300V}  ${OFF}
-	Power Control  ${AC_230V}  ${OFF}
-	Power Control  ${PROTECTED_EARTH}  ${OFF}
-	Power Control  ${p_24V}  ${OFF}
-	Power Control  ${p_5V}  ${OFF}
+#Power Test
+#	Log to Console    *** Power Control test
+#	Power Control  ${DC_300V}  ${ON}
+#	Power Control  ${AC_230V}  ${ON}
+#	Power Control  ${PROTECTED_EARTH}  ${ON}
+#	Power Control  ${p_24V}  ${ON}
+#	Power Control  ${p_5V}  ${ON}
+#
+#	Power Control  ${DC_300V}  ${OFF}
+#	Power Control  ${AC_230V}  ${OFF}
+#	Power Control  ${PROTECTED_EARTH}  ${OFF}
+#	Power Control  ${p_24V}  ${OFF}
+#	Power Control  ${p_5V}  ${OFF}
 
 Relay Test
+	Log to Console    *** Relay test
 	Relay Control  ${RELAY1}  ${ON}
 	Relay Control  ${RELAY8}  ${ON}
 	Relay Control  ${RELAY1}  ${OFF}
@@ -74,14 +77,17 @@ Relay Test
 	Relay Control  ${RELAY9}  ${OFF}
 	Relay Control  ${RELAY16}  ${OFF}
 
-#IO 0 Port Test
-#    #Define an object for MCP23S17 device 0 port A, GPA0 high 
-#    ${MCP_A0_Hi} =    Create Dictionary  Device=${MCP23S17_DEVICE_0}  
-#        ...                          	 SPI-addr=${SPI_ADDRESS_0}
-#	...    				 Reg=${SPI_GPIOA}
-#	...			    	 Port=${SPI_GPA0}
-#	...			    	 Mode=${HIGH}
-#
-##   Set output port high
-#    Config MCP   ${MCP_A0_Hi}
+IO 0 Port Test
+    #Define an object for MCP23S17 device 0 port A, GPA0 high 
+    ${MCP_A0_HI} =    Create Dictionary  Device=${MCP23S17_DEVICE_0}  
+        ...                          	 SPI-addr=${SPI_ADDRESS_0}
+	...    				 Reg=${SPI_GPIOA}
+	...			    	 Port=${SPI_GPA0}
+	...			    	 Mode=${HIGH}
+
+
+    Config MCP   ${MCP_A0_HI}
+
+#   Set output port high
+#    Config MCP   ${MCP_A0_HI}
 

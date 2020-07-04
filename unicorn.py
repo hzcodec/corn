@@ -155,11 +155,13 @@ class unicorn:
 	def config_mcp(self, item):
 		logger.info('Config mcp: {}'.format(item))
 
-		device = int(item["Device"], 16)
-		address = int(item["SPI-addr"], 16)
-		reg = int(item["Reg"], 16)
-		port = int(item["Port"], 16)
-		mode = int(item["Mode"], 16)
+		device = int(item["Device"])
+		address = int(item["SPI-addr"])
+		#reg = int(item["Reg"], 16)
+		port = int(item["Port"])
+		mode = int(item["Mode"])
+
+		reg = 0x14
 
 		self._spi1_ce2(device, 1)
 		self.io_expander_spi.configure(device, address, reg, port, mode)
@@ -313,7 +315,7 @@ def main():
 
 	# ---------------------------------------------------
 	# Test of power control (MCP23017, addr=0 and addr=1)
-	myUnicorn.init_io_expander_i2c()
+	#myUnicorn.init_io_expander_i2c()
 	#power_control_test(myUnicorn)
 	#relay_control_test(myUnicorn)
 	# ---------------------------------------------------

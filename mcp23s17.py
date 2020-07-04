@@ -111,8 +111,8 @@ class mcp23s17_internal:
 		time.sleep(0.1)
 
 	def configure_mcp(self, params):
-		#logger.info('Internal mcp config: {}'.format(params))
-		self.dispatcher[params[REG_IDX]](params)
+		logger.info('Internal mcp config: {}'.format(params))
+		#self.dispatcher[params[REG_IDX]](params)
 
 	def _get_instance_prop(self, device, mode=IN, level=LOW):
 		if device == MCP23S17_DEVICE_0:
@@ -199,28 +199,29 @@ class mcp23s17_internal:
 		self.spi.writebytes([control_byte, SPI_IODIRB, self.port_B_dir_vector])
 
 	def _set_bit_for_gpioa(self, param):
-		device = param[DEVICE_IDX]
-		addr = param[ADDR_IDX]
-		gpio_pin = param[GPIO_PIN_IDX]
-		level = param[LEVEL_IDX]
+		print('Param: ', param)
+		#device = param[DEVICE_IDX]
+		#addr = param[ADDR_IDX]
+		#gpio_pin = param[GPIO_PIN_IDX]
+		#level = param[LEVEL_IDX]
 
-		control_byte = WRITE_OP_CODE | (addr >> SHIFT_CTRL_BIT)
+		#control_byte = WRITE_OP_CODE | (addr >> SHIFT_CTRL_BIT)
 
-		if self.port_A_dir_vector & (1 << gpio_pin):
-			logger.warn('PortA {} is configured as input'.format(gpio_pin))
-		else:
-			if level == HIGH:
-				self.port_A_pin_vector |= (1 << gpio_pin)
-			elif level == LOW:
-				self.port_A_pin_vector &= ~(1 << gpio_pin)
-			else:
-				logger.warn('(spi) Invalid config, Use either LOW or HIGH for pin: {} at Port A'.format(gpio_pin))
+		#if self.port_A_dir_vector & (1 << gpio_pin):
+		#	logger.warn('PortA {} is configured as input'.format(gpio_pin))
+		#else:
+		#	if level == HIGH:
+		#		self.port_A_pin_vector |= (1 << gpio_pin)
+		#	elif level == LOW:
+		#		self.port_A_pin_vector &= ~(1 << gpio_pin)
+		#	else:
+		#		logger.warn('(spi) Invalid config, Use either LOW or HIGH for pin: {} at Port A'.format(gpio_pin))
 
-		rv1, rv2, rv3 = self._get_instance_prop(device, DUMMY, level)
-		print('(spi) Device: {},  Addr {} - Pin: {}, Level: {}, Pin Vector A: 0x{:02x}'
-		            .format(rv1, addr, gpio_pin, rv3, self.port_A_pin_vector))
+		#rv1, rv2, rv3 = self._get_instance_prop(device, DUMMY, level)
+		#print('(spi) Device: {},  Addr {} - Pin: {}, Level: {}, Pin Vector A: 0x{:02x}'
+		#            .format(rv1, addr, gpio_pin, rv3, self.port_A_pin_vector))
 
-		self.spi.writebytes([control_byte, SPI_GPIOA, self.port_A_pin_vector])
+		#self.spi.writebytes([control_byte, SPI_GPIOA, self.port_A_pin_vector])
 
 	def _set_bit_for_gpiob(self, param):
 		device = param[DEVICE_IDX]

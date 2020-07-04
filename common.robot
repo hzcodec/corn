@@ -67,7 +67,7 @@ ${SPARE7} =    7  #    -"-  , GPB7
 # MCP23s17 device
 # =============================================================================================
 ${SPI_IODIRA} =   0x00
-${SPI_GPIOA} =   0x14
+${SPI_GPIOA} =   0x12
 ${SPI_GPA0} =    0
 ${SPI_GPA1} =    1
 ${SPI_GPA2} =    2
@@ -78,7 +78,7 @@ ${SPI_GPA6} =    6
 ${SPI_GPA7} =    7
 
 ${SPI_IODIRB} =   0x01
-${SPI_GPIOB} =   0x15
+${SPI_GPIOB} =   0x13
 ${SPI_GPB0} =    0
 ${SPI_GPB1} =    1
 ${SPI_GPB2} =    2
