@@ -8,6 +8,7 @@ Resource  config.robot
 *** Variables ***
 &{MCP_port_A0}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA0}  Mode=${OUT}
 &{MCP_port_A1}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA1}  Mode=${OUT}
+&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
 
 *** Keywords ***
 Invalid Selection
@@ -36,9 +37,8 @@ Initialize Interfaces
 	Initialize MCP ports
 
 Set 24V Power
-	[Documentation]   24V LED (on Halfbaked board) light comes on/off
+	[Documentation]   24V LED
 	[Arguments]    ${mode}
-
 
 *** Settings ***
 Suite Setup     Initialize Interfaces
@@ -46,8 +46,20 @@ Suite Setup     Initialize Interfaces
 
 *** Test Cases ***
 MCP_test
-	Config MCP    ${MCP_port_A0}
-	Config MCP    ${MCP_port_A1}
+	Log to Console    *** MCP23S17 SPI test
+	Config MCP   ${MCP_port_A0}
+	Config MCP   ${MCP_port_A1}
+
+Relay Test
+	Relay Control  ${RELAY1}  ${ON}
+	Relay Control  ${RELAY8}  ${ON}
+	Relay Control  ${RELAY1}  ${OFF}
+	Relay Control  ${RELAY8}  ${OFF}
+
+	Relay Control  ${RELAY9}  ${ON}
+	Relay Control  ${RELAY16}  ${ON}
+	Relay Control  ${RELAY9}  ${OFF}
+	Relay Control  ${RELAY16}  ${OFF}
 
 #IO 0 Port Test
 #    #Define an object for MCP23S17 device 0 port A, GPA0 high 
@@ -56,7 +68,7 @@ MCP_test
 #	...    				 Reg=${SPI_GPIOA}
 #	...			    	 Port=${SPI_GPA0}
 #	...			    	 Mode=${HIGH}
-
-#    Set output port high
+#
+##   Set output port high
 #    Config MCP   ${MCP_A0_Hi}
 
