@@ -22,7 +22,8 @@ DELAY2 = 0.2
 DELAY3 = 1
 
 OFFSET_OF_BIT = 8
-
+DELIMITER = 60
+SPACE = 20
 
 class unicorn:
 	ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
@@ -47,10 +48,14 @@ class unicorn:
 		Port GPB0 - GPB2 are inputs
 		Port GPB3 - GPB7 are outputs
 		"""
+		logger.info(DELIMITER*'-')
 		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017, addr=0')
+
+		logger.info(SPACE*' '+'--- Port A ---')
 		for port in range(I2C_GPA0, I2C_GPA5+1):
 			self.io_expander_1_i2c.configure(I2C_IODIRA, port, OUT)
 
+		logger.info(SPACE*' '+'--- Port B ---')
 		for port in range(I2C_GPB3, I2C_GPB7+1):
 			self.io_expander_1_i2c.configure(I2C_IODIRB, port, OUT)
 
@@ -58,8 +63,11 @@ class unicorn:
 		Port GPA0 - GPA7 are outputs
 		Port GPB0 - GPB7 are outputs
 		"""
+		logger.info(DELIMITER*'-')
 		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017, addr=1')
+		logger.info(SPACE*' '+'--- Port A ---')
 		self._config_io_port_A()
+		logger.info(SPACE*' '+'--- Port B ---')
 		self._config_io_port_B()
 
 	def power_control(self, relay, mode):
@@ -309,7 +317,6 @@ def main():
 	# ---------------------------------------------------
 	# Test of power control (MCP23017, addr=0 and addr=1)
 	myUnicorn.init_io_expander_i2c()
-	myUnicorn.config_io_port_A()
 	#power_control_test(myUnicorn)
 	#relay_control_test(myUnicorn)
 	# ---------------------------------------------------
