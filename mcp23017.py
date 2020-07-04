@@ -113,7 +113,7 @@ class mcp23017:
 				print('(i2c) Invalid config, Use either LOW or HIGH for pin: {} at Port B'.
 				      format(gpio_pin))
 
-		print('(i2c) Output PortB - Pin: {}, mode: {}, Pin Vector: 0x{:02x}'
+		print('(i2c) Output PortB - Pin: {}, Level: {}, Pin Vector: 0x{:02x}'
 		      .format(gpio_pin, level, self.port_B_pin_vector))
 
 		self.bus.write_byte_data(self.hardware_address, I2C_GPIOB, self.port_B_pin_vector)

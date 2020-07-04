@@ -97,9 +97,9 @@ class unicorn:
 		bit0 = device & (1 << 0)
 		bit1 = (device & (1 << 1)) >> 1
 		bit2 = (device & (1 << 2)) >> 2
-		#print('bit[2:0]: {}{}{}'.format(bit2, bit1, bit0))
 
 		if en == 1:
+			logger.info('Enable device: {}'.format(mcp23017_get_device_name(device)))
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPB5, bit0)
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPB6, bit1)
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPB7, bit2)
@@ -226,15 +226,15 @@ class unicorn:
 	# ------------------------------------------------------------
 	# Low/middle layer User Defined Tests
 	# ------------------------------------------------------------
-	def user_test_1(self):
-		self._spi1_ce2(DAC61408_DEVICE, 1)
-		self._spi1_ce2(DAC61408_DEVICE, 0)
-
-		self._spi1_ce2(AD4112_DEVICE_0, 1)
-		self._spi1_ce2(AD4112_DEVICE_0, 0)
-
-		self._spi1_ce2(AD4112_DEVICE_1, 1)
-		self._spi1_ce2(AD4112_DEVICE_1, 0)
+#	def user_test_1(self):
+#		self._spi1_ce2(DAC61408_DEVICE, 1)
+#		self._spi1_ce2(DAC61408_DEVICE, 0)
+#
+#		self._spi1_ce2(AD4112_DEVICE_0, 1)
+#		self._spi1_ce2(AD4112_DEVICE_0, 0)
+#
+#		self._spi1_ce2(AD4112_DEVICE_1, 1)
+#		self._spi1_ce2(AD4112_DEVICE_1, 0)
 
 		#self._spi1_ce2(MCP23S17_INSTANCE_0, 1)
 		#self._spi1_ce2(MCP23S17_INSTANCE_0, 0)
@@ -319,8 +319,8 @@ def main():
 	# ---------------------------------------------------
 	# Test of power control (MCP23017, addr=0 and addr=1)
 	myUnicorn.init_io_expander_i2c()
-	power_control_test(myUnicorn)
-	relay_control_test(myUnicorn)
+	#power_control_test(myUnicorn)
+	#relay_control_test(myUnicorn)
 	# ---------------------------------------------------
 
 
