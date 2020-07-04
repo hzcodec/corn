@@ -50,6 +50,13 @@ MCP_test
 	Config MCP   ${MCP_port_A0}
 	Config MCP   ${MCP_port_A1}
 
+Power Test
+	Power Control  ${DC_300V}  ${ON}
+	Power Control  ${AC_230V}  ${ON}
+#${PROTECTED_EARTH} =  2
+#${p_24V} =  3
+#${p_5V} =  4
+
 Relay Test
 	Relay Control  ${RELAY1}  ${ON}
 	Relay Control  ${RELAY8}  ${ON}

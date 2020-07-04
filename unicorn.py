@@ -75,7 +75,8 @@ class unicorn:
 		else:
 			self.io_expander_1_i2c.configure(I2C_GPIOA, int(relay), LOW)
 
-		logger.info('Power control: Power: {}, mode: {}'.format(relay, mode))
+		logger.info('Power control: Power: {}, mode: {}'.
+		             format(mcp23017_get_power_name(int(relay)), mcp23017_get_level_name(int(mode))))
 
 		time.sleep(DELAY)
 

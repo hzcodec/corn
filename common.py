@@ -370,6 +370,20 @@ def mcp23017_get_level_name(inp):
 	else:
 		return 'OFF'
 
+def mcp23017_get_power_name(inp):
+	if inp == DC_300V:
+		return 'DC_300V'
+	elif inp == AC_230V:
+		return 'AC_230V'
+	elif inp == PROTECTED_EARTH:
+		return 'PROTECTED_EARTH'
+	elif inp == p_24V:
+		return 'p_24V'
+	elif inp == p_24V:
+		return 'p_5V'
+	else:
+		return 'OFF'
+
 def mcp23017_get_device_name(inp):
 	if inp == 0:
 		return 'AD4112 device 1'
