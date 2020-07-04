@@ -54,6 +54,10 @@ class unicorn:
 		for port in range(I2C_GPB3, I2C_GPB7+1):
 			self.io_expander_1_i2c.configure(I2C_IODIRB, port, OUT)
 
+		""" 
+		Port GPA0 - GPA7 are outputs
+		Port GPB0 - GPB7 are outputs
+		"""
 		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017, addr=1')
 		self._config_io_port_A()
 		self._config_io_port_B()
