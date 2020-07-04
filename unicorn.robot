@@ -53,9 +53,9 @@ MCP_test
 Power Test
 	Power Control  ${DC_300V}  ${ON}
 	Power Control  ${AC_230V}  ${ON}
-#${PROTECTED_EARTH} =  2
-#${p_24V} =  3
-#${p_5V} =  4
+	Power Control  ${PROTECTED_EARTH}  ${ON}
+	Power Control  ${p_24V}  ${ON}
+	Power Control  ${p_5V}  ${ON}
 
 Relay Test
 	Relay Control  ${RELAY1}  ${ON}
