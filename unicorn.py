@@ -47,13 +47,16 @@ class unicorn:
 		Port GPB0 - GPB2 are inputs
 		Port GPB3 - GPB7 are outputs
 		"""
-		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017')
-
+		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017, addr=0')
 		for port in range(I2C_GPA0, I2C_GPA5+1):
 			self.io_expander_1_i2c.configure(I2C_IODIRA, port, OUT)
 
 		for port in range(I2C_GPB3, I2C_GPB7+1):
 			self.io_expander_1_i2c.configure(I2C_IODIRB, port, OUT)
+
+		logger.info('Initialize 16-bit I/O Expander, I2C - MCP23017, addr=1')
+		self._config_io_port_A()
+		self._config_io_port_B()
 
 	def power_control(self, relay, mode):
 		if int(mode) == ON:
@@ -108,14 +111,13 @@ class unicorn:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPB6, LOW)
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPB7, LOW)
 
+	# ........................................................................
 	# Handling of addr=0x21
-	# [FIXME] config should be under init_io_expander later on
-	def config_io_port_A(self):
+	def _config_io_port_A(self):
 		for port in range(I2C_GPA0, I2C_GPA7+1):
 			self.io_expander_2_i2c.configure(I2C_IODIRA, port, OUT)
 
-	# [FIXME] config should be under init_io_expander later on
-	def config_io_port_B(self):
+	def _config_io_port_B(self):
 		for port in range(I2C_GPB0, I2C_GPB7+1):
 			self.io_expander_2_i2c.configure(I2C_IODIRB, port, OUT)
 
@@ -133,6 +135,7 @@ class unicorn:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA4, HIGH)
 		else:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA4, LOW)
+	# ........................................................................
 
 	# ------------------------------------------------------------
 	# MCP23S17
@@ -223,23 +226,6 @@ class unicorn:
 
 		self.dac.configure(domain_range, dac, dac_range)
 
-	# ------------------------------------------------------------
-	# Low/middle layer User Defined Tests
-	# ------------------------------------------------------------
-#	def user_test_1(self):
-#		self._spi1_ce2(DAC61408_DEVICE, 1)
-#		self._spi1_ce2(DAC61408_DEVICE, 0)
-#
-#		self._spi1_ce2(AD4112_DEVICE_0, 1)
-#		self._spi1_ce2(AD4112_DEVICE_0, 0)
-#
-#		self._spi1_ce2(AD4112_DEVICE_1, 1)
-#		self._spi1_ce2(AD4112_DEVICE_1, 0)
-
-		#self._spi1_ce2(MCP23S17_INSTANCE_0, 1)
-		#self._spi1_ce2(MCP23S17_INSTANCE_0, 0)
-
-
 # --------------------------------------------------------------------------------
 # Test functions used during development
 # --------------------------------------------------------------------------------
@@ -259,8 +245,8 @@ def power_control_test(obj):
 
 def relay_control_test(obj):
 	print('relay_control_test')
-	obj.config_io_port_A()
-	obj.config_io_port_B()
+	obj._config_io_port_A()
+	obj._config_io_port_B()
 	obj.relay_control(RELAY1, ON)
 	obj.relay_control(RELAY2, ON)
 	obj.relay_control(RELAY3, ON)
@@ -319,6 +305,7 @@ def main():
 	# ---------------------------------------------------
 	# Test of power control (MCP23017, addr=0 and addr=1)
 	myUnicorn.init_io_expander_i2c()
+	myUnicorn.config_io_port_A()
 	#power_control_test(myUnicorn)
 	#relay_control_test(myUnicorn)
 	# ---------------------------------------------------
