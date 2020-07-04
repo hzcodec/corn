@@ -57,6 +57,12 @@ Power Test
 	Power Control  ${p_24V}  ${ON}
 	Power Control  ${p_5V}  ${ON}
 
+	Power Control  ${DC_300V}  ${OFF}
+	Power Control  ${AC_230V}  ${OFF}
+	Power Control  ${PROTECTED_EARTH}  ${OFF}
+	Power Control  ${p_24V}  ${OFF}
+	Power Control  ${p_5V}  ${OFF}
+
 Relay Test
 	Relay Control  ${RELAY1}  ${ON}
 	Relay Control  ${RELAY8}  ${ON}
