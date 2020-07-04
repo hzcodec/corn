@@ -363,3 +363,17 @@ def mcp23017_get_mode_name(inp):
 		return 'OUT'
 	else:
 		return 'IN'
+
+def mcp23017_get_device_name(inp):
+	if inp == 0:
+		return 'AD4112 device 1'
+	elif inp == 1:
+		return 'AD4112 device 2'
+	elif inp == 2:
+		return 'DAC61408'
+	elif inp == 3:
+		return 'MCP23S17 device 0'
+	elif inp == 4:
+		return 'MCP23S17 device 1'
+	else:
+		return ERROR_MSG
