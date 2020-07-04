@@ -39,7 +39,6 @@ class unicorn:
 	# ------------------------------------------------------------
 	# MCP23017
 	# ------------------------------------------------------------
-	# Handling of addr=0x20
 	def init_io_expander_i2c(self):
 		"""
 		Port GPA0 - GPA5 are outputs
@@ -84,21 +83,18 @@ class unicorn:
 		"""
 		Control the relays connected to MCP23017, addr=1
 		"""
+		print('Relay: {} Level: {}'.format(int(relay)+1, mcp23017_get_level_name(int(mode))))
 
 		if int(relay) < 8:
 			if int(mode) == ON:
-				print('Relay: {} On'.format(int(relay)+1))
 				self.io_expander_2_i2c.configure(I2C_GPIOA, int(relay), HIGH)
 			else:
-				print('Relay: {} Off'.format(int(relay)+1))
 				self.io_expander_2_i2c.configure(I2C_GPIOA, int(relay), LOW)
 
 		elif int(relay) < 17:
 			if int(mode) == ON:
-				print('Relay: {} On'.format(int(relay)+1))
 				self.io_expander_2_i2c.configure(I2C_GPIOB, int(relay)-OFFSET_OF_BIT, HIGH)
 			else:
-				print('Relay: {} Off'.format(int(relay)-OFFSET_OF_BIT))
 				self.io_expander_2_i2c.configure(I2C_GPIOB, int(relay)-OFFSET_OF_BIT, LOW)
 
 		else:
