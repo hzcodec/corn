@@ -364,6 +364,12 @@ def mcp23017_get_mode_name(inp):
 	else:
 		return 'IN'
 
+def mcp23017_get_level_name(inp):
+	if inp == ON:
+		return 'ON'
+	else:
+		return 'OFF'
+
 def mcp23017_get_device_name(inp):
 	if inp == 0:
 		return 'AD4112 device 1'
