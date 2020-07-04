@@ -125,7 +125,7 @@ ${SYSTEM_OFFSET} =  6
 ${SYSTEM_GAIN} =    7
 
 # Channel register CH0-CH7, 0x10 - 0x1f
-${CH_EN} = 0x8000
+${CH_EN} =   0x8000
 ${SETUP_SEL_0} =   0x0000
 ${SETUP_SEL_1} =   0x1000
 ${SETUP_SEL_2} =   0x2000
