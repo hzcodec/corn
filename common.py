@@ -397,3 +397,11 @@ def mcp23017_get_device_name(inp):
 		return 'MCP23S17 device 1'
 	else:
 		return ERROR_MSG
+
+def mcp23s17_get_device_name(inp):
+	if inp == 3:
+		return 'MCP23S17_DEVICE_0'
+	elif inp == 4:
+		return 'MCP23S17_DEVICE_1'
+	else:
+		return ERROR_MSG
