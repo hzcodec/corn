@@ -31,6 +31,8 @@ Resource  config.robot
 &{MCP_A7_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA7}  Mode=${HIGH}
 &{MCP_B0_LO}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOB}  Port=${SPI_GPB0}  Mode=${LOW}
 
+&{MCP_port_dev1}     Device=${MCP23S17_DEVICE_1}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA3}  Mode=${OUT}
+&{MCP_A3_HI_dev1}    Device=${MCP23S17_DEVICE_1}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA3}  Mode=${HIGH}
 
 *** Keywords ***
 Invalid Selection
@@ -159,34 +161,38 @@ Suite Setup     Initialize Interfaces
 #	:FOR  ${index}  IN RANGE  0  8
 #	\       Config MCP  ${MCP_CONTAINTER6}[${index}]
 
-MCP_test 4
-	Log to Console    *** MCP23S17 SPI test 4
-	Config MCP   ${MCP_port_A0}  # user-defined configuration, see 'Variables'
-	Config MCP   ${MCP_port_A6}  #                 -"-
-
-	Config MCP   ${MCP_A0_HI}    #                 -"-
-	Config MCP   ${MCP_A0_LO}    #                 -"-
-	Config MCP   ${MCP_A1_HI}    # this will give a warning since port is input
-	Config MCP   ${MCP_A7_HI}    # this will give a warning since port is input
-	Config MCP   ${MCP_A6_HI}
-
-	Config MCP   ${MCP_port_B0}
-	Config MCP   ${MCP_B0_LO}
-
-
-#Power Test
-#	Log to Console    *** Power Control test
-#	Power Control  ${DC_300V}  ${ON}
-#	Power Control  ${AC_230V}  ${ON}
-#	Power Control  ${PROTECTED_EARTH}  ${ON}
-#	Power Control  ${p_24V}  ${ON}
-#	Power Control  ${p_5V}  ${ON}
+#MCP_test 4
+#	Log to Console    *** MCP23S17 SPI test 4
+#	Config MCP   ${MCP_port_A0}  # user-defined configuration, see 'Variables'
+#	Config MCP   ${MCP_port_A6}  #                 -"-
 #
-#	Power Control  ${DC_300V}  ${OFF}
-#	Power Control  ${AC_230V}  ${OFF}
-#	Power Control  ${PROTECTED_EARTH}  ${OFF}
-#	Power Control  ${p_24V}  ${OFF}
-#	Power Control  ${p_5V}  ${OFF}
+#	Config MCP   ${MCP_A0_HI}    #                 -"-
+#	Config MCP   ${MCP_A0_LO}    #                 -"-
+#	Config MCP   ${MCP_A1_HI}    # this will give a warning since port is input
+#	Config MCP   ${MCP_A7_HI}    # this will give a warning since port is input
+#	Config MCP   ${MCP_A6_HI}
+#
+#	Config MCP   ${MCP_port_B0}
+#	Config MCP   ${MCP_B0_LO}
+
+#MCP_test 5
+#	Log to Console    *** MCP23S17 SPI test 5
+#	Config MCP  ${MCP_port_dev1}
+#	Config MCP  ${MCP_A3_HI_dev1}
+
+Power Test
+	Log to Console    *** Power Control test
+	Power Control  ${DC_300V}  ${ON}
+	Power Control  ${AC_230V}  ${ON}
+	Power Control  ${PROTECTED_EARTH}  ${ON}
+	Power Control  ${p_24V}  ${ON}
+	Power Control  ${p_5V}  ${ON}
+
+	Power Control  ${DC_300V}  ${OFF}
+	Power Control  ${AC_230V}  ${OFF}
+	Power Control  ${PROTECTED_EARTH}  ${OFF}
+	Power Control  ${p_24V}  ${OFF}
+	Power Control  ${p_5V}  ${OFF}
 
 #Relay Test
 #	Log to Console    *** Relay test
@@ -199,18 +205,4 @@ MCP_test 4
 #	Relay Control  ${RELAY16}  ${ON}
 #	Relay Control  ${RELAY9}  ${OFF}
 #	Relay Control  ${RELAY16}  ${OFF}
-
-#IO 0 Port Test
-#    #Define an object for MCP23S17 device 0 port A, GPA0 high 
-#    ${MCP_A0_HI} =    Create Dictionary  Device=${MCP23S17_DEVICE_0}  
-#        ...                          	 SPI-addr=${SPI_ADDRESS_0}
-#	...    				 Reg=${SPI_GPIOA}
-#	...			    	 Port=${SPI_GPA0}
-#	...			    	 Mode=${HIGH}
-#
-#
-#    Config MCP   ${MCP_A0_HI}
-#
-#   Set output port high
-#    Config MCP   ${MCP_A0_HI}
 

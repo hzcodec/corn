@@ -84,7 +84,7 @@ class unicorn:
 		"""
 		Control the relays connected to MCP23017, addr=1
 		"""
-		print('Relay: {} Level: {}'.format(int(relay)+1, mcp23017_get_level_name(int(mode))))
+		logger.info('Relay: {} Level: {}'.format(int(relay)+1, mcp23017_get_level_name(int(mode))))
 
 		if int(relay) < 8:
 			if int(mode) == ON:
@@ -104,7 +104,7 @@ class unicorn:
 		time.sleep(DELAY1)
 
 	def _spi1_ce2(self, device, en):
-		print('SPI1_CE2_{} enable: {}'.format(device, en))
+		logger.info('SPI1_CE2_{} enable: {}'.format(device, en))
 
 		bit0 = device & (1 << 0)
 		bit1 = (device & (1 << 1)) >> 1
