@@ -162,13 +162,21 @@ class unicorn:
 		mode = int(item["Mode"])
 
 		if reg == SPI_IODIRA:
-			port_name = 'A'
-		else:
-			port_name = 'B'
+			port_name = 'GPA'
+			rv = mcp23017_get_mode_name(mode)
+		elif reg == SPI_IODIRB:
+			port_name = 'GPB'
+			rv = mcp23017_get_mode_name(mode)
+		elif reg == SPI_GPIOA:
+			port_name = 'GPIOA'
+			rv = mcp23017_get_level_name(mode)
+		elif reg == SPI_GPIOB:
+			port_name = 'GPIOB'
+			rv = mcp23017_get_level_name(mode)
 
 		dev_name = mcp23s17_get_device_name(device)
 
-		logger.info('Device: {}, Addr: {}, Port: GP{}{}, Mode: {}'.format(dev_name, address, port_name, port, mcp23017_get_mode_name(mode)))
+		logger.info('Device: {}, Addr: {}, Port: {}{}, Mode: {}'.format(dev_name, address, port_name, port, rv))
 
 		self._spi1_ce2(device, 1)
 		self.io_expander_spi.configure(device, address, reg, port, mode)
