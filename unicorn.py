@@ -166,7 +166,9 @@ class unicorn:
 		else:
 			port_name = 'B'
 
-		logger.info('Port: GP{}{}, Mode: {}'.format(port_name, port, mcp23017_get_mode_name(mode)))
+		dev_name = mcp23s17_get_device_name(device)
+
+		logger.info('Device: {}, Addr: {}, Port: GP{}{}, Mode: {}'.format(dev_name, address, port_name, port, mcp23017_get_mode_name(mode)))
 
 		self._spi1_ce2(device, 1)
 		self.io_expander_spi.configure(device, address, reg, port, mode)
