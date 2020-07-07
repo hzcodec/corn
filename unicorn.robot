@@ -180,19 +180,19 @@ Suite Setup     Initialize Interfaces
 #	Config MCP  ${MCP_port_dev1}
 #	Config MCP  ${MCP_A3_HI_dev1}
 
-Power Test
-	Log to Console    *** Power Control test
-	Power Control  ${DC_300V}  ${ON}
-	Power Control  ${AC_230V}  ${ON}
-	Power Control  ${PROTECTED_EARTH}  ${ON}
-	Power Control  ${p_24V}  ${ON}
-	Power Control  ${p_5V}  ${ON}
-
-	Power Control  ${DC_300V}  ${OFF}
-	Power Control  ${AC_230V}  ${OFF}
-	Power Control  ${PROTECTED_EARTH}  ${OFF}
-	Power Control  ${p_24V}  ${OFF}
-	Power Control  ${p_5V}  ${OFF}
+#Power Test
+#	Log to Console    *** Power Control test
+#	Power Control  ${DC_300V}  ${ON}
+#	Power Control  ${AC_230V}  ${ON}
+#	Power Control  ${PROTECTED_EARTH}  ${ON}
+#	Power Control  ${p_24V}  ${ON}
+#	Power Control  ${p_5V}  ${ON}
+#
+#	Power Control  ${DC_300V}  ${OFF}
+#	Power Control  ${AC_230V}  ${OFF}
+#	Power Control  ${PROTECTED_EARTH}  ${OFF}
+#	Power Control  ${p_24V}  ${OFF}
+#	Power Control  ${p_5V}  ${OFF}
 
 #Relay Test
 #	Log to Console    *** Relay test
@@ -206,3 +206,9 @@ Power Test
 #	Relay Control  ${RELAY9}  ${OFF}
 #	Relay Control  ${RELAY16}  ${OFF}
 
+Lock Reset test
+	Log to Console    *** Lock Reset test
+	Set Safe  ${ON}
+	Set Reset  ${ON}
+	Set Safe  ${OFF}
+	Set Reset  ${OFF}

@@ -136,14 +136,18 @@ class unicorn:
 	def set_safe(self, mode):
 		if int(mode) == ON:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA3, HIGH)
+			logger.info('Lock lid')
 		else:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA3, LOW)
+			logger.info('Unlock lid')
 
 	def set_reset(self, mode):
 		if int(mode) == ON:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA4, HIGH)
+			logger.info('Set Reset')
 		else:
 			self.io_expander_1_i2c.configure(I2C_GPIOB, I2C_GPA4, LOW)
+			logger.info('Release Reset')
 	# ........................................................................
 
 	# ------------------------------------------------------------
