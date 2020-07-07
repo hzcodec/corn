@@ -27,6 +27,9 @@ Resource  config.robot
 &{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
 &{MCP_A0_LO}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${LOW}
 &{MCP_A1_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA1}  Mode=${HIGH}
+&{MCP_A6_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA6}  Mode=${HIGH}
+&{MCP_A7_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA7}  Mode=${HIGH}
+&{MCP_B0_LO}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOB}  Port=${SPI_GPB0}  Mode=${LOW}
 
 
 *** Keywords ***
@@ -159,9 +162,17 @@ Suite Setup     Initialize Interfaces
 MCP_test 4
 	Log to Console    *** MCP23S17 SPI test 4
 	Config MCP   ${MCP_port_A0}  # user-defined configuration, see 'Variables'
-	Config MCP   ${MCP_A0_HI}
-	Config MCP   ${MCP_A0_LO}
-	Config MCP   ${MCP_A1_HI}  # this will give a warning since port is input
+	Config MCP   ${MCP_port_A6}  #                 -"-
+
+	Config MCP   ${MCP_A0_HI}    #                 -"-
+	Config MCP   ${MCP_A0_LO}    #                 -"-
+	Config MCP   ${MCP_A1_HI}    # this will give a warning since port is input
+	Config MCP   ${MCP_A7_HI}    # this will give a warning since port is input
+	Config MCP   ${MCP_A6_HI}
+
+	Config MCP   ${MCP_port_B0}
+	Config MCP   ${MCP_B0_LO}
+
 
 #Power Test
 #	Log to Console    *** Power Control test
