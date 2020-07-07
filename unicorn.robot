@@ -7,10 +7,25 @@ Resource  config.robot
 
 *** Variables ***
 &{MCP_port_A0}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA0}  Mode=${OUT}
-&{MCP_port_A1}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA1}  Mode=${OUT}
+&{MCP_port_A1}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA1}  Mode=${IN}
+&{MCP_port_A2}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA2}  Mode=${OUT}
+&{MCP_port_A3}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA3}  Mode=${IN}
+&{MCP_port_A4}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA4}  Mode=${OUT}
+&{MCP_port_A5}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA5}  Mode=${IN}
+&{MCP_port_A6}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA6}  Mode=${OUT}
+&{MCP_port_A7}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRA}  Port=${SPI_GPA7}  Mode=${IN}
+
+&{MCP_port_B0}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB0}  Mode=${OUT}
+&{MCP_port_B1}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB1}  Mode=${IN}
+&{MCP_port_B2}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB2}  Mode=${OUT}
+&{MCP_port_B3}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB3}  Mode=${IN}
+&{MCP_port_B4}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB4}  Mode=${OUT}
+&{MCP_port_B5}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB5}  Mode=${IN}
+&{MCP_port_B6}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB6}  Mode=${OUT}
+&{MCP_port_B7}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB7}  Mode=${IN}
+
 #&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
 
-${kalle} =    0x14
 
 *** Keywords ***
 Invalid Selection
@@ -48,8 +63,23 @@ Suite Setup     Initialize Interfaces
 *** Test Cases ***
 MCP_test
 	Log to Console    *** MCP23S17 SPI test
-	Config MCP   ${MCP_port_A0}
-	Config MCP   ${MCP_port_A1}
+	Config MCP   ${MCP_port_A0}  # a user-defined configuration, see 'Variables'
+	Config MCP   ${MCP_port_A1}  #                 -"-
+	Config MCP   ${MCP_port_A2}  #                 -"-
+	Config MCP   ${MCP_port_A3}  #                 -"-
+	Config MCP   ${MCP_port_A4}  #                 -"-
+	Config MCP   ${MCP_port_A5}  #                 -"-
+	Config MCP   ${MCP_port_A6}  #                 -"-
+	Config MCP   ${MCP_port_A7}  #                 -"-
+
+	Config MCP   ${MCP_port_B0}  # a user-defined configuration, see 'Variables'
+	Config MCP   ${MCP_port_B1}  #                 -"-
+	Config MCP   ${MCP_port_B2}  #                 -"-
+	Config MCP   ${MCP_port_B3}  #                 -"-
+	Config MCP   ${MCP_port_B4}  #                 -"-
+	Config MCP   ${MCP_port_B5}  #                 -"-
+	Config MCP   ${MCP_port_B6}  #                 -"-
+	Config MCP   ${MCP_port_B7}  #                 -"-
 
 #Power Test
 #	Log to Console    *** Power Control test
@@ -65,29 +95,29 @@ MCP_test
 #	Power Control  ${p_24V}  ${OFF}
 #	Power Control  ${p_5V}  ${OFF}
 
-Relay Test
-	Log to Console    *** Relay test
-	Relay Control  ${RELAY1}  ${ON}
-	Relay Control  ${RELAY8}  ${ON}
-	Relay Control  ${RELAY1}  ${OFF}
-	Relay Control  ${RELAY8}  ${OFF}
+#Relay Test
+#	Log to Console    *** Relay test
+#	Relay Control  ${RELAY1}  ${ON}
+#	Relay Control  ${RELAY8}  ${ON}
+#	Relay Control  ${RELAY1}  ${OFF}
+#	Relay Control  ${RELAY8}  ${OFF}
+#
+#	Relay Control  ${RELAY9}  ${ON}
+#	Relay Control  ${RELAY16}  ${ON}
+#	Relay Control  ${RELAY9}  ${OFF}
+#	Relay Control  ${RELAY16}  ${OFF}
 
-	Relay Control  ${RELAY9}  ${ON}
-	Relay Control  ${RELAY16}  ${ON}
-	Relay Control  ${RELAY9}  ${OFF}
-	Relay Control  ${RELAY16}  ${OFF}
-
-IO 0 Port Test
-    #Define an object for MCP23S17 device 0 port A, GPA0 high 
-    ${MCP_A0_HI} =    Create Dictionary  Device=${MCP23S17_DEVICE_0}  
-        ...                          	 SPI-addr=${SPI_ADDRESS_0}
-	...    				 Reg=${SPI_GPIOA}
-	...			    	 Port=${SPI_GPA0}
-	...			    	 Mode=${HIGH}
-
-
-    Config MCP   ${MCP_A0_HI}
-
+#IO 0 Port Test
+#    #Define an object for MCP23S17 device 0 port A, GPA0 high 
+#    ${MCP_A0_HI} =    Create Dictionary  Device=${MCP23S17_DEVICE_0}  
+#        ...                          	 SPI-addr=${SPI_ADDRESS_0}
+#	...    				 Reg=${SPI_GPIOA}
+#	...			    	 Port=${SPI_GPA0}
+#	...			    	 Mode=${HIGH}
+#
+#
+#    Config MCP   ${MCP_A0_HI}
+#
 #   Set output port high
 #    Config MCP   ${MCP_A0_HI}
 

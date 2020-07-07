@@ -153,15 +153,20 @@ class unicorn:
 		logger.info('Initialize 16-bit I/O Expander, SPI - MCP23S17')
 
 	def config_mcp(self, item):
-		logger.info('Config mcp: {}'.format(item))
+		#logger.info('Config mcp: {}'.format(item))
 
 		device = int(item["Device"])
 		address = int(item["SPI-addr"])
-		#reg = int(item["Reg"], 16)
+		reg = int(item["Reg"], 16)
 		port = int(item["Port"])
 		mode = int(item["Mode"])
 
-		reg = 0x14
+		if reg == SPI_IODIRA:
+			port_name = 'A'
+		else:
+			port_name = 'B'
+
+		logger.info('Port: GP{}{}, Mode: {}'.format(port_name, port, mcp23017_get_mode_name(mode)))
 
 		self._spi1_ce2(device, 1)
 		self.io_expander_spi.configure(device, address, reg, port, mode)
