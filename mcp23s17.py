@@ -111,8 +111,8 @@ class mcp23s17_internal:
 		time.sleep(0.1)
 
 	def configure_mcp(self, params):
-		logger.info('Internal mcp config: {}'.format(params))
-		#self.dispatcher[params[REG_IDX]](params)
+		#logger.info('Internal mcp config: {}'.format(params))
+		self.dispatcher[params[REG_IDX]](params)
 
 	def _get_instance_prop(self, device, mode=IN, level=LOW):
 		if device == MCP23S17_DEVICE_0:
