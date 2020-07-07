@@ -24,7 +24,9 @@ Resource  config.robot
 &{MCP_port_B6}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB6}  Mode=${OUT}
 &{MCP_port_B7}  Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_IODIRB}  Port=${SPI_GPB7}  Mode=${IN}
 
-#&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
+&{MCP_A0_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${HIGH}
+&{MCP_A0_LO}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA0}  Mode=${LOW}
+&{MCP_A1_HI}    Device=${MCP23S17_DEVICE_0}  SPI-addr=${MCP23S17_ADDR_0}  Reg=${SPI_GPIOA}  Port=${SPI_GPA1}  Mode=${HIGH}
 
 
 *** Keywords ***
@@ -139,20 +141,27 @@ Suite Setup     Initialize Interfaces
 #	Config MCP   ${MCP_10B6}  #                    -"-
 #	Config MCP   ${MCP_10A7}  #                    -"-
 
-MCP_test 3
-	Log to Console    *** MCP23S17 SPI test 3
+#MCP_test 3
+#	Log to Console    *** MCP23S17 SPI test 3
+#
+#	#Initialize MCP instance 0, addr 0, port A
+#	:FOR  ${index}  IN RANGE  0  8
+#	\       Config MCP  ${MCP_CONTAINTER1}[${index}]
+#
+#	#Initialize MCP instance 0, addr 0, port B
+#	:FOR  ${index}  IN RANGE  0  8
+#	\       Config MCP  ${MCP_CONTAINTER2}[${index}]
+#
+#	#Initialize MCP instance 1, addr 0, port B
+#	:FOR  ${index}  IN RANGE  0  8
+#	\       Config MCP  ${MCP_CONTAINTER6}[${index}]
 
-	#Initialize MCP instance 0, addr 0, port A
-	:FOR  ${index}  IN RANGE  0  8
-	\       Config MCP  ${MCP_CONTAINTER1}[${index}]
-
-	#Initialize MCP instance 0, addr 0, port B
-	:FOR  ${index}  IN RANGE  0  8
-	\       Config MCP  ${MCP_CONTAINTER2}[${index}]
-
-	#Initialize MCP instance 1, addr 0, port B
-	:FOR  ${index}  IN RANGE  0  8
-	\       Config MCP  ${MCP_CONTAINTER6}[${index}]
+MCP_test 4
+	Log to Console    *** MCP23S17 SPI test 4
+	Config MCP   ${MCP_port_A0}  # user-defined configuration, see 'Variables'
+	Config MCP   ${MCP_A0_HI}
+	Config MCP   ${MCP_A0_LO}
+	Config MCP   ${MCP_A1_HI}  # this will give a warning since port is input
 
 #Power Test
 #	Log to Console    *** Power Control test
