@@ -82,7 +82,7 @@ Suite Setup     Initialize Interfaces
 #	Config MCP   ${MCP_port_B7}  #                 -"-
 
 #MCP_test 2
-#	Log to Console    *** MCP23S17 device 0, addr 0
+#	Log to Console    *** MCP23S17 SPI test 2
 #	Config MCP   ${MCP_00A0}  # pre-defined configuration, see config.robot
 #	Config MCP   ${MCP_00A1}  #                    -"-
 #	Config MCP   ${MCP_00A2}  #                    -"-
@@ -140,7 +140,7 @@ Suite Setup     Initialize Interfaces
 #	Config MCP   ${MCP_10A7}  #                    -"-
 
 MCP_test 3
-	Log to Console    *** MCP23S17 device 0, addr 0
+	Log to Console    *** MCP23S17 SPI test 3
 
 	#Initialize MCP instance 0, addr 0, port A
 	:FOR  ${index}  IN RANGE  0  8
@@ -153,7 +153,6 @@ MCP_test 3
 	#Initialize MCP instance 1, addr 0, port B
 	:FOR  ${index}  IN RANGE  0  8
 	\       Config MCP  ${MCP_CONTAINTER6}[${index}]
-
 
 #Power Test
 #	Log to Console    *** Power Control test
