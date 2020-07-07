@@ -81,63 +81,79 @@ Suite Setup     Initialize Interfaces
 #	Config MCP   ${MCP_port_B6}  #                 -"-
 #	Config MCP   ${MCP_port_B7}  #                 -"-
 
-MCP_test 2
+#MCP_test 2
+#	Log to Console    *** MCP23S17 device 0, addr 0
+#	Config MCP   ${MCP_00A0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_00A1}  #                    -"-
+#	Config MCP   ${MCP_00A2}  #                    -"-
+#	Config MCP   ${MCP_00A3}  #                    -"-
+#	Config MCP   ${MCP_00A4}  #                    -"-
+#	Config MCP   ${MCP_00A5}  #                    -"-
+#	Config MCP   ${MCP_00A6}  #                    -"-
+#	Config MCP   ${MCP_00A7}  #                    -"-
+#
+#	Config MCP   ${MCP_00B0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_00B1}  #                    -"-
+#	Config MCP   ${MCP_00B2}  #                    -"-
+#	Config MCP   ${MCP_00B3}  #                    -"-
+#	Config MCP   ${MCP_00B4}  #                    -"-
+#	Config MCP   ${MCP_00B5}  #                    -"-
+#	Config MCP   ${MCP_00B6}  #                    -"-
+#	Config MCP   ${MCP_00B7}  #                    -"-
+#
+#	Log to Console    *** MCP23S17 device 0, addr 1
+#	Config MCP   ${MCP_01A0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_01A1}  #                    -"-
+#	Config MCP   ${MCP_01A2}  #                    -"-
+#	Config MCP   ${MCP_01A3}  #                    -"-
+#	Config MCP   ${MCP_01A4}  #                    -"-
+#	Config MCP   ${MCP_01A5}  #                    -"-
+#	Config MCP   ${MCP_01A6}  #                    -"-
+#	Config MCP   ${MCP_01A7}  #                    -"-
+#
+#	Config MCP   ${MCP_01B0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_01B1}  #                    -"-
+#	Config MCP   ${MCP_01B2}  #                    -"-
+#	Config MCP   ${MCP_01B3}  #                    -"-
+#	Config MCP   ${MCP_01B4}  #                    -"-
+#	Config MCP   ${MCP_01B5}  #                    -"-
+#	Config MCP   ${MCP_01B6}  #                    -"-
+#	Config MCP   ${MCP_01A7}  #                    -"-
+#
+#	Log to Console    *** MCP23S17 device 1, addr 0
+#	Config MCP   ${MCP_10A0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_10A1}  #                    -"-
+#	Config MCP   ${MCP_10A2}  #                    -"-
+#	Config MCP   ${MCP_10A3}  #                    -"-
+#	Config MCP   ${MCP_10A4}  #                    -"-
+#	Config MCP   ${MCP_10A5}  #                    -"-
+#	Config MCP   ${MCP_10A6}  #                    -"-
+#	Config MCP   ${MCP_10A7}  #                    -"-
+#
+#	Config MCP   ${MCP_10B0}  # pre-defined configuration, see config.robot
+#	Config MCP   ${MCP_10B1}  #                    -"-
+#	Config MCP   ${MCP_10B2}  #                    -"-
+#	Config MCP   ${MCP_10B3}  #                    -"-
+#	Config MCP   ${MCP_10B4}  #                    -"-
+#	Config MCP   ${MCP_10B5}  #                    -"-
+#	Config MCP   ${MCP_10B6}  #                    -"-
+#	Config MCP   ${MCP_10A7}  #                    -"-
+
+MCP_test 3
 	Log to Console    *** MCP23S17 device 0, addr 0
-	Config MCP   ${MCP_00A0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_00A1}  #                    -"-
-	Config MCP   ${MCP_00A2}  #                    -"-
-	Config MCP   ${MCP_00A3}  #                    -"-
-	Config MCP   ${MCP_00A4}  #                    -"-
-	Config MCP   ${MCP_00A5}  #                    -"-
-	Config MCP   ${MCP_00A6}  #                    -"-
-	Config MCP   ${MCP_00A7}  #                    -"-
 
-	Config MCP   ${MCP_00B0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_00B1}  #                    -"-
-	Config MCP   ${MCP_00B2}  #                    -"-
-	Config MCP   ${MCP_00B3}  #                    -"-
-	Config MCP   ${MCP_00B4}  #                    -"-
-	Config MCP   ${MCP_00B5}  #                    -"-
-	Config MCP   ${MCP_00B6}  #                    -"-
-	Config MCP   ${MCP_00B7}  #                    -"-
+	#Initialize MCP instance 0, addr 0, port A
+	:FOR  ${index}  IN RANGE  0  8
+	\       Config MCP  ${MCP_CONTAINTER1}[${index}]
 
-	Log to Console    *** MCP23S17 device 0, addr 1
-	Config MCP   ${MCP_01A0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_01A1}  #                    -"-
-	Config MCP   ${MCP_01A2}  #                    -"-
-	Config MCP   ${MCP_01A3}  #                    -"-
-	Config MCP   ${MCP_01A4}  #                    -"-
-	Config MCP   ${MCP_01A5}  #                    -"-
-	Config MCP   ${MCP_01A6}  #                    -"-
-	Config MCP   ${MCP_01A7}  #                    -"-
+	#Initialize MCP instance 0, addr 0, port B
+	:FOR  ${index}  IN RANGE  0  8
+	\       Config MCP  ${MCP_CONTAINTER2}[${index}]
 
-	Config MCP   ${MCP_01B0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_01B1}  #                    -"-
-	Config MCP   ${MCP_01B2}  #                    -"-
-	Config MCP   ${MCP_01B3}  #                    -"-
-	Config MCP   ${MCP_01B4}  #                    -"-
-	Config MCP   ${MCP_01B5}  #                    -"-
-	Config MCP   ${MCP_01B6}  #                    -"-
-	Config MCP   ${MCP_01A7}  #                    -"-
+	#Initialize MCP instance 1, addr 0, port B
+	:FOR  ${index}  IN RANGE  0  8
+	\       Config MCP  ${MCP_CONTAINTER6}[${index}]
 
-	Log to Console    *** MCP23S17 device 1, addr 0
-	Config MCP   ${MCP_10A0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_10A1}  #                    -"-
-	Config MCP   ${MCP_10A2}  #                    -"-
-	Config MCP   ${MCP_10A3}  #                    -"-
-	Config MCP   ${MCP_10A4}  #                    -"-
-	Config MCP   ${MCP_10A5}  #                    -"-
-	Config MCP   ${MCP_10A6}  #                    -"-
-	Config MCP   ${MCP_10A7}  #                    -"-
-
-	Config MCP   ${MCP_10B0}  # pre-defined configuration, see config.robot
-	Config MCP   ${MCP_10B1}  #                    -"-
-	Config MCP   ${MCP_10B2}  #                    -"-
-	Config MCP   ${MCP_10B3}  #                    -"-
-	Config MCP   ${MCP_10B4}  #                    -"-
-	Config MCP   ${MCP_10B5}  #                    -"-
-	Config MCP   ${MCP_10B6}  #                    -"-
-	Config MCP   ${MCP_10A7}  #                    -"-
 
 #Power Test
 #	Log to Console    *** Power Control test
