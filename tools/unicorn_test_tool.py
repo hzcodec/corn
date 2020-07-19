@@ -57,10 +57,11 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.menu_timer_8s, id=2033)
 
 	def _define_status_bar(self):
-		self.statusbar = self.CreateStatusBar(1)
+		self.statusbar = self.CreateStatusBar(2)
 		var = str(self.panel.release_time)
 		status_str = STATUS_STRING + var
 		self.statusbar.SetStatusText(status_str)
+		self.statusbar.SetStatusText('More status info', 1)
 
 	def menu_test_1(self, event):
 		print('Test sequence 1')
@@ -109,7 +110,7 @@ class MyPanel(wx.Panel):
 		self.relay_list = []
 		self.auto_release_1 = False
 		self.auto_release_2 = False
-		self.release_time = 1000
+		self.release_time = 2000
 
 		self.release_timer_1 = wx.Timer(self)
 		self.Bind(wx.EVT_TIMER, self.update, self.release_timer_1)
