@@ -18,69 +18,66 @@ class MyFrame(wx.Frame):
 		
 		# 1st menu from left
 		menu1 = wx.Menu()
-		menu1.Append(101, "&Mercury", "This the text in the Statusbar")
-		menu1.Append(102, "&Venus", "")
-		menu1.Append(103, "&Earth", "You may select Earth too")
+		menu1.Append(101, "&Test 1", "This the text in the Statusbar")
+		menu1.Append(102, "&Test 2", "")
 		menu1.AppendSeparator()
 		menu1.Append(104, "&Close", "Close this frame")
 		# Add menu to the menu bar
-		menuBar.Append(menu1, "&Planets")
+		menuBar.Append(menu1, "&Application")
 		
 		# 2nd menu from left
 		menu2 = wx.Menu()
-		menu2.Append(201, "Hydrogen")
-		menu2.Append(202, "Helium")
+		menu2.Append(201, "Config 1")
+		menu2.Append(202, "Config 2")
+
 		# a submenu in the 2nd menu
 		submenu = wx.Menu()
-		submenu.Append(2031,"Lanthanium")
-		submenu.Append(2032,"Cerium")
-		submenu.Append(2033,"Praseodymium")
-		menu2.Append(203, "Lanthanides", submenu)
+		submenu.Append(2031,"2 sec")
+		submenu.Append(2032,"4 sec")
+		submenu.Append(2033,"8 sec")
+		menu2.Append(203, "Set timer", submenu)
+
 		# Append 2nd menu
-		menuBar.Append(menu2, "&Elements")
+		menuBar.Append(menu2, "&Configure")
 
 		self.SetMenuBar(menuBar)
 
 		# Menu events
 		#self.Bind(wx.EVT_MENU_HIGHLIGHT_ALL, self.OnMenuHighlight)
 		
-		self.Bind(wx.EVT_MENU, self.Menu101, id=101)
-		self.Bind(wx.EVT_MENU, self.Menu102, id=102)
-		self.Bind(wx.EVT_MENU, self.Menu103, id=103)
+		self.Bind(wx.EVT_MENU, self.menu_test_1, id=101)
+		self.Bind(wx.EVT_MENU, self.menu_test_2, id=102)
 		self.Bind(wx.EVT_MENU, self.CloseWindow, id=104)
 
-		self.Bind(wx.EVT_MENU, self.Menu201, id=201)
-		self.Bind(wx.EVT_MENU, self.Menu202, id=202)
-		self.Bind(wx.EVT_MENU, self.Menu2031, id=2031)
-		self.Bind(wx.EVT_MENU, self.Menu2032, id=2032)
-		self.Bind(wx.EVT_MENU, self.Menu2033, id=2033)
+		self.Bind(wx.EVT_MENU, self.menu_config_1, id=201)
+		self.Bind(wx.EVT_MENU, self.menu_config_2, id=202)
+		self.Bind(wx.EVT_MENU, self.menu_timer_2s, id=2031)
+		self.Bind(wx.EVT_MENU, self.menu_timer_4s, id=2032)
+		self.Bind(wx.EVT_MENU, self.menu_timer_8s, id=2033)
 
-	def Menu101(self, event):
-		print('Welcome to Mercury\n')
+	def menu_test_1(self, event):
+		print('Test sequence 1')
 
-	def Menu102(self, event):
-		print('Welcome to Venus\n')
-
-	def Menu103(self, event):
-		print('Welcome to the Earth\n')
+	def menu_test_2(self, event):
+		print('Test sequence 2')
 
 	def CloseWindow(self, event):
 		self.Close()
 
-	def Menu201(self, event):
-		print('Chemical element number 1\n')
+	def menu_config_1(self, event):
+		print('Config 1')
 
-	def Menu202(self, event):
-		print('Chemical element number 2\n')
+	def menu_config_2(self, event):
+		print('Config 2')
 
-	def Menu2031(self, event):
-		print('Element number 57\n')
+	def menu_timer_2s(self, event):
+		print('Set Timer: 2 sec')
 	
-	def Menu2032(self, event):
-		print('Element number 58\n')
+	def menu_timer_4s(self, event):
+		print('Set Timer: 4 sec')
 	
-	def Menu2033(self, event):
-		print('Element number 59\n')
+	def menu_timer_8s(self, event):
+		print('Set Timer: 8 sec')
 
 	def onConfig(self, event):
 		print('Config')
