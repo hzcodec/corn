@@ -13,16 +13,25 @@ class MyFrame(wx.Frame):
 		super(MyFrame, self).__init__(parent, title =title, size = WINDOW_SIZE)
 		self.panel = MyPanel(self)
 
-		menubar = wx.MenuBar()
+		menuBar = wx.MenuBar()
+
 		fileMenu = wx.Menu()
-		fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-		menubar.Append(fileMenu, '&File')
-		self.SetMenuBar(menubar)
-				
-		self.Bind(wx.EVT_MENU, self.onQuit, fileItem)
+		fileMenu.Append(1, "&Quit", "Quit application")
+		menuBar.Append(fileMenu, "&File")
+
+		configMenu = wx.Menu()
+		configMenu.Append(2, "&Set Timer", "Set new Timer value")
+		menuBar.Append(configMenu, "&Configure")
+
+		self.SetMenuBar(menuBar)
+		self.Bind(wx.EVT_MENU, self.onQuit, id=1)
+		self.Bind(wx.EVT_MENU, self.onConfig, id=2)
 
 	def onQuit(self, event):
 		self.Close()
+
+	def onConfig(self, event):
+		print('Config')
  
  
 class MyPanel(wx.Panel):
