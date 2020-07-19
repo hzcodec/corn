@@ -77,29 +77,24 @@ class MyFrame(wx.Frame):
 	def menu_config_2(self, event):
 		print('Config 2')
 
-	def menu_timer_2s(self, event):
-		print('Set Timer: 2 sec')
-		self.panel.release_time = 2000
+	def _get_status_string(self, val):
+		var = str(val/1000)
+		return STATUS_STRING + var + ' sec'
 
-		var = str(self.panel.release_time/1000)
-		status_str = STATUS_STRING + var + ' sec'
-		self.statusbar.SetStatusText(status_str)
+	def menu_timer_2s(self, event):
+		self.panel.release_time = 2000
+		rv = self._get_status_string(self.panel.release_time)
+		self.statusbar.SetStatusText(rv)
 	
 	def menu_timer_4s(self, event):
-		print('Set Timer: 4 sec')
 		self.panel.release_time = 4000
-
-		var = str(self.panel.release_time/1000)
-		status_str = STATUS_STRING + var + ' sec'
-		self.statusbar.SetStatusText(status_str)
+		rv = self._get_status_string(self.panel.release_time)
+		self.statusbar.SetStatusText(rv)
 	
 	def menu_timer_8s(self, event):
-		print('Set Timer: 8 sec')
 		self.panel.release_time = 8000
-
-		var = str(self.panel.release_time/1000)
-		status_str = 'Auto release time: ' + var + ' sec'
-		self.statusbar.SetStatusText(status_str)
+		rv = self._get_status_string(self.panel.release_time)
+		self.statusbar.SetStatusText(rv)
 
 	def closeWindow(self, event):
 		self.Close()
