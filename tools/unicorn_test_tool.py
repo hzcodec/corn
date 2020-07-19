@@ -13,22 +13,74 @@ class MyFrame(wx.Frame):
 		super(MyFrame, self).__init__(parent, title =title, size = WINDOW_SIZE)
 		self.panel = MyPanel(self)
 
+		# Prepare the menu bar
 		menuBar = wx.MenuBar()
-
-		fileMenu = wx.Menu()
-		fileMenu.Append(1, "&Quit", "Quit application")
-		menuBar.Append(fileMenu, "&File")
-
-		configMenu = wx.Menu()
-		configMenu.Append(2, "&Set Timer", "Set new Timer value")
-		menuBar.Append(configMenu, "&Configure")
+		
+		# 1st menu from left
+		menu1 = wx.Menu()
+		menu1.Append(101, "&Mercury", "This the text in the Statusbar")
+		menu1.Append(102, "&Venus", "")
+		menu1.Append(103, "&Earth", "You may select Earth too")
+		menu1.AppendSeparator()
+		menu1.Append(104, "&Close", "Close this frame")
+		# Add menu to the menu bar
+		menuBar.Append(menu1, "&Planets")
+		
+		# 2nd menu from left
+		menu2 = wx.Menu()
+		menu2.Append(201, "Hydrogen")
+		menu2.Append(202, "Helium")
+		# a submenu in the 2nd menu
+		submenu = wx.Menu()
+		submenu.Append(2031,"Lanthanium")
+		submenu.Append(2032,"Cerium")
+		submenu.Append(2033,"Praseodymium")
+		menu2.Append(203, "Lanthanides", submenu)
+		# Append 2nd menu
+		menuBar.Append(menu2, "&Elements")
 
 		self.SetMenuBar(menuBar)
-		self.Bind(wx.EVT_MENU, self.onQuit, id=1)
-		self.Bind(wx.EVT_MENU, self.onConfig, id=2)
 
-	def onQuit(self, event):
+		# Menu events
+		#self.Bind(wx.EVT_MENU_HIGHLIGHT_ALL, self.OnMenuHighlight)
+		
+		self.Bind(wx.EVT_MENU, self.Menu101, id=101)
+		self.Bind(wx.EVT_MENU, self.Menu102, id=102)
+		self.Bind(wx.EVT_MENU, self.Menu103, id=103)
+		self.Bind(wx.EVT_MENU, self.CloseWindow, id=104)
+
+		self.Bind(wx.EVT_MENU, self.Menu201, id=201)
+		self.Bind(wx.EVT_MENU, self.Menu202, id=202)
+		self.Bind(wx.EVT_MENU, self.Menu2031, id=2031)
+		self.Bind(wx.EVT_MENU, self.Menu2032, id=2032)
+		self.Bind(wx.EVT_MENU, self.Menu2033, id=2033)
+
+	def Menu101(self, event):
+		print('Welcome to Mercury\n')
+
+	def Menu102(self, event):
+		print('Welcome to Venus\n')
+
+	def Menu103(self, event):
+		print('Welcome to the Earth\n')
+
+	def CloseWindow(self, event):
 		self.Close()
+
+	def Menu201(self, event):
+		print('Chemical element number 1\n')
+
+	def Menu202(self, event):
+		print('Chemical element number 2\n')
+
+	def Menu2031(self, event):
+		print('Element number 57\n')
+	
+	def Menu2032(self, event):
+		print('Element number 58\n')
+	
+	def Menu2033(self, event):
+		print('Element number 59\n')
 
 	def onConfig(self, event):
 		print('Config')
