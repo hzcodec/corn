@@ -60,8 +60,8 @@ class MyFrame(wx.Frame):
 
 	def _define_status_bar(self):
 		self.statusbar = self.CreateStatusBar(2)
-		var = str(self.panel.release_time)
-		status_str = STATUS_STRING + var
+		var = str(self.panel.release_time/1000)
+		status_str = STATUS_STRING + var + ' sec'
 		self.statusbar.SetStatusText(status_str)
 		self.statusbar.SetStatusText('More status info', 1)
 
@@ -81,24 +81,24 @@ class MyFrame(wx.Frame):
 		print('Set Timer: 2 sec')
 		self.panel.release_time = 2000
 
-		var = str(self.panel.release_time)
-		status_str = STATUS_STRING + var
+		var = str(self.panel.release_time/1000)
+		status_str = STATUS_STRING + var + ' sec'
 		self.statusbar.SetStatusText(status_str)
 	
 	def menu_timer_4s(self, event):
 		print('Set Timer: 4 sec')
 		self.panel.release_time = 4000
 
-		var = str(self.panel.release_time)
-		status_str = STATUS_STRING + var
+		var = str(self.panel.release_time/1000)
+		status_str = STATUS_STRING + var + ' sec'
 		self.statusbar.SetStatusText(status_str)
 	
 	def menu_timer_8s(self, event):
 		print('Set Timer: 8 sec')
 		self.panel.release_time = 8000
 
-		var = str(self.panel.release_time)
-		status_str = 'Auto release time: ' + var
+		var = str(self.panel.release_time/1000)
+		status_str = 'Auto release time: ' + var + ' sec'
 		self.statusbar.SetStatusText(status_str)
 
 	def closeWindow(self, event):
@@ -400,7 +400,6 @@ class MyPanel(wx.Panel):
 		self.auto_release_2 = cb.GetValue()
 		self.release_timer_2.Start(self.release_time)
 		
-
 
 class MyApp(wx.App):
 	def OnInit(self):
