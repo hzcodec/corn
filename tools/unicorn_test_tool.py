@@ -7,10 +7,14 @@ YELLOW = [255, 225, 0]
 WINDOW_SIZE = (800, 400)
 RELAY_BUTTON_SIZE = (65, 30)
 
+STATUS_STRING = 'Auto release time: '
+
 class MyFrame(wx.Frame):
 	def __init__(self, parent, title):
 		super(MyFrame, self).__init__(parent, title =title, size = WINDOW_SIZE)
 		self.panel = MyPanel(self)
+
+		self._define_status_bar()
 
 		# Prepare the menu bar
 		menuBar = wx.MenuBar()
@@ -52,6 +56,12 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_MENU, self.menu_timer_4s, id=2032)
 		self.Bind(wx.EVT_MENU, self.menu_timer_8s, id=2033)
 
+	def _define_status_bar(self):
+		self.statusbar = self.CreateStatusBar(1)
+		var = str(self.panel.release_time)
+		status_str = STATUS_STRING + var
+		self.statusbar.SetStatusText(status_str)
+
 	def menu_test_1(self, event):
 		print('Test sequence 1')
 
@@ -67,14 +77,26 @@ class MyFrame(wx.Frame):
 	def menu_timer_2s(self, event):
 		print('Set Timer: 2 sec')
 		self.panel.release_time = 2000
+
+		var = str(self.panel.release_time)
+		status_str = STATUS_STRING + var
+		self.statusbar.SetStatusText(status_str)
 	
 	def menu_timer_4s(self, event):
 		print('Set Timer: 4 sec')
 		self.panel.release_time = 4000
+
+		var = str(self.panel.release_time)
+		status_str = STATUS_STRING + var
+		self.statusbar.SetStatusText(status_str)
 	
 	def menu_timer_8s(self, event):
 		print('Set Timer: 8 sec')
 		self.panel.release_time = 8000
+
+		var = str(self.panel.release_time)
+		status_str = 'Auto release time: ' + var
+		self.statusbar.SetStatusText(status_str)
 
 	def closeWindow(self, event):
 		self.Close()
