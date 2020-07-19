@@ -15,7 +15,9 @@ class MyFrame(wx.Frame):
 		self.panel = MyPanel(self)
 
 		self._define_status_bar()
+		self._define_menus()
 
+	def _define_menus(self):
 		# Prepare the menu bar
 		menuBar = wx.MenuBar()
 		
@@ -35,9 +37,9 @@ class MyFrame(wx.Frame):
 
 		# a submenu in the 2nd menu
 		submenu = wx.Menu()
-		submenu.Append(2031,"2 sec")
-		submenu.Append(2032,"4 sec")
-		submenu.Append(2033,"8 sec")
+		submenu.Append(2031, "2 sec")
+		submenu.Append(2032, "4 sec")
+		submenu.Append(2033, "8 sec")
 		menu2.Append(203, "Set timer", submenu)
 
 		# Append 2nd menu
@@ -124,8 +126,8 @@ class MyPanel(wx.Panel):
 		box2 = wx.StaticBox(self, -1, "     Relay Control  ")
 		self.bsizer2 = wx.StaticBoxSizer(box2, wx.VERTICAL)
 		
-		self.define_power_buttons()
-		self.define_relay_buttons()
+		self._define_power_buttons()
+		self._define_relay_buttons()
 		#self.define_checkbox()
 		
 		border = wx.BoxSizer(wx.VERTICAL)
@@ -134,7 +136,7 @@ class MyPanel(wx.Panel):
 		
 		self.SetSizer(border)
 
-	def define_power_buttons(self):
+	def _define_power_buttons(self):
 		self.dc300VBtn = wx.ToggleButton(self, label = "DC 300 V")
 		self.dc300VBtn.SetBackgroundColour(RED)
 		self.dc300VBtn.Bind(wx.EVT_TOGGLEBUTTON, self.onDC300V)
@@ -151,7 +153,7 @@ class MyPanel(wx.Panel):
 		self.bsizer.Add(self.ac230VBtn, 0, wx.TOP|wx.BOTTOM|wx.LEFT, 10)
 		self.bsizer.Add(self._24VBtn, 0, wx.TOP|wx.BOTTOM|wx.LEFT|wx.RIGHT, 10)
 
-	def define_relay_buttons(self):
+	def _define_relay_buttons(self):
 		rel1 = wx.Button(self, label = "Rel 1", size=RELAY_BUTTON_SIZE)
 		rel1.SetBackgroundColour(RED)
 		rel1.SetFont(wx.Font(10, wx.FONTFAMILY_MODERN, wx.NORMAL, wx.BOLD))
@@ -373,8 +375,6 @@ class MyPanel(wx.Panel):
 		print('Relay: {}'.format(idx+1))
 
 		if self.relay_list[idx].state == False:
-			print('Greeen')
-
 			if self.auto_release_1:
 				self.release_timer_1.Start(self.release_time)
 
@@ -382,8 +382,6 @@ class MyPanel(wx.Panel):
 			self.relay_list[idx].state = True
 
 		elif self.relay_list[idx].state == True:
-			print('Reeeed')
-
 			if self.auto_release_2:
 				self.release_timer_2.Start(self.release_time)
 
