@@ -6,7 +6,6 @@ GREEN = [0, 255, 0]
 YELLOW = [255, 225, 0]
 WINDOW_SIZE = (800, 400)
 RELAY_BUTTON_SIZE = (65, 30)
-DELAY_TIMER = 4000
 
 class MyFrame(wx.Frame):
 	def __init__(self, parent, title):
@@ -43,11 +42,9 @@ class MyFrame(wx.Frame):
 		self.SetMenuBar(menuBar)
 
 		# Menu events
-		#self.Bind(wx.EVT_MENU_HIGHLIGHT_ALL, self.OnMenuHighlight)
-		
 		self.Bind(wx.EVT_MENU, self.menu_test_1, id=101)
 		self.Bind(wx.EVT_MENU, self.menu_test_2, id=102)
-		self.Bind(wx.EVT_MENU, self.CloseWindow, id=104)
+		self.Bind(wx.EVT_MENU, self.closeWindow, id=104)
 
 		self.Bind(wx.EVT_MENU, self.menu_config_1, id=201)
 		self.Bind(wx.EVT_MENU, self.menu_config_2, id=202)
@@ -61,9 +58,6 @@ class MyFrame(wx.Frame):
 	def menu_test_2(self, event):
 		print('Test sequence 2')
 
-	def CloseWindow(self, event):
-		self.Close()
-
 	def menu_config_1(self, event):
 		print('Config 1')
 
@@ -72,16 +66,19 @@ class MyFrame(wx.Frame):
 
 	def menu_timer_2s(self, event):
 		print('Set Timer: 2 sec')
+		self.panel.release_time = 2000
 	
 	def menu_timer_4s(self, event):
 		print('Set Timer: 4 sec')
+		self.panel.release_time = 4000
 	
 	def menu_timer_8s(self, event):
 		print('Set Timer: 8 sec')
+		self.panel.release_time = 8000
 
-	def onConfig(self, event):
-		print('Config')
- 
+	def closeWindow(self, event):
+		self.Close()
+
  
 class MyPanel(wx.Panel):
 	def __init__(self, parent):
@@ -90,6 +87,7 @@ class MyPanel(wx.Panel):
 		self.relay_list = []
 		self.auto_release_1 = False
 		self.auto_release_2 = False
+		self.release_time = 1000
 
 		self.release_timer_1 = wx.Timer(self)
 		self.Bind(wx.EVT_TIMER, self.update, self.release_timer_1)
@@ -321,7 +319,6 @@ class MyPanel(wx.Panel):
 		else:
 		    self._24VBtn.SetBackgroundColour(RED)
 
-
 	def update(self, event):
 		print('Update')
 		print(time.ctime)
@@ -345,6 +342,8 @@ class MyPanel(wx.Panel):
 			self.release_timer_2.Stop()
 
 	def onRelay(self, event):
+		print('Release time: {}'.format(self.release_time)) 
+
 		idx = event.GetEventObject().realy_idx
 		state = event.GetEventObject().state
 
@@ -354,7 +353,7 @@ class MyPanel(wx.Panel):
 			print('Greeen')
 
 			if self.auto_release_1:
-				self.release_timer_1.Start(DELAY_TIMER)
+				self.release_timer_1.Start(self.release_time)
 
 			self.relay_list[idx].SetBackgroundColour(GREEN)
 			self.relay_list[idx].state = True
@@ -363,7 +362,7 @@ class MyPanel(wx.Panel):
 			print('Reeeed')
 
 			if self.auto_release_2:
-				self.release_timer_2.Start(DELAY_TIMER)
+				self.release_timer_2.Start(self.release_time)
 
 			self.relay_list[idx].SetBackgroundColour(RED)
 			self.relay_list[idx].state = False
@@ -372,13 +371,13 @@ class MyPanel(wx.Panel):
 		cb = event.GetEventObject() 
 		print(cb.GetLabel(),'1 is clicked:',cb.GetValue())
 		self.auto_release_1 = cb.GetValue()
-		self.release_timer_1.Start(DELAY_TIMER)
+		self.release_timer_1.Start(self.release_time)
 
 	def onAutoRelease2(self, event):
 		cb = event.GetEventObject() 
 		print(cb.GetLabel(),'2 is clicked:',cb.GetValue())
 		self.auto_release_2 = cb.GetValue()
-		self.release_timer_2.Start(DELAY_TIMER)
+		self.release_timer_2.Start(self.release_time)
 		
 
 
